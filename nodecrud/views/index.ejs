@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet" ">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">TODOS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active text-white" aria-current="page" href="#"
+                >Home</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-3">
+      <h2 class="mb-0">Add Todo</h2>
+      <form action="/" method="post">
+        <div class="form-group mt-3">
+          <label for="title">Title:</label>
+          <input
+            type="title"
+            class="form-control"
+            id="title"
+            placeholder="Enter title"
+            value="<%=singleTodo.title ? singleTodo.title: "" %>"
+            name="title"
+          />
+          <input
+          type="hidden"
+          name="userId"
+          value="<%=singleTodo.id ? singleTodo.id: "" %>"
+        />
+        </div>
+        <div class="form-group mt-3">
+          <label for="description">Description:</label>
+          <textarea
+            type="description"
+            rows="5"
+            class="form-control"
+            id="description"
+            placeholder="Enter description"
+            name="description"
+          ><%= singleTodo.description ? singleTodo.description: "" %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </form>
+    </div>
+
+    <div class="container ">
+      <div class="row">
+       <% todos?.forEach((elm)=>{%>
+         <div class="col-md-4 mt-2">
+             <div class="card">
+               <div class="card-body">
+                 <h5 class="card-title"><%=elm?.title%></h5>
+                 <p class="card-text"><%=elm?.description%></p>
+                 <a href="/singleTodos/<%=elm?.id%>" class="btn btn-success">Edit</a>
+                 <a href="/deleteTodos/<%=elm?.id%>" class="btn btn-danger">Delete</a>
+               </div>
+             </div>
+           </div>
+           <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
